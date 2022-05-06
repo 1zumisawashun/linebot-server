@@ -1,9 +1,14 @@
-function foo() {
-  var b = a * 2;
+import express, { Request, Response, NextFunction } from "express";
+import { json } from "body-parser";
+import todoRoutes from "./routes/todos";
 
-  console.log(b);
-}
+const app = express();
 
-var a = 2;
+app.use(json());
+app.use("/todos", todoRoutes);
 
-foo();
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.status(500).json({ message: err.message });
+});
+
+app.listen(3000);
