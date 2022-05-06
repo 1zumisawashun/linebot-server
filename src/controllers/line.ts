@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { handleEvent } from "../middlewares/lineMiddleware";
+import { handleEvent } from "../middlewares/line";
 
 // ルーター設定
 export const line_post: RequestHandler = (req, res) => {

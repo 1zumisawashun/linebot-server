@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { line_post } from "../controllers/lineController";
+import { line_post } from "../controllers/line";
 import { middleware } from "@line/bot-sdk";
 import * as dotenv from "dotenv";
 const router = Router();
