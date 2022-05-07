@@ -1,23 +1,27 @@
-### package.json の作成
+# 初期設定
+
+- ### package.json を作成する
 
 ```
-npm init
+npm init -y
 ```
 
-### tsconfig.json の作成
+- ### tsconfig.json を作成する
 
 ```
 tsc --init
 ```
 
-### サーバーを起動する
+# ターミナルで実行すること
+
+- ### サーバーを起動する(ts ファイル変更があったら自動でトランスパイルしてアプリを再起動する)
 
 ```
-npm run start
+npm run dev
 ```
 
-### 変更を監視する（ TS から JS にコンパイルする）
+- ### トンネリングさせる
 
 ```
-tsc -w
+npm run ngrok
 ```
