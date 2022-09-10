@@ -12,7 +12,7 @@
     "clean": "rimraf dist",
     "deploy": "vercel --prod",
     "ngrok": "ngrok http 3000",
-    "update-rss": "npm run build && node ./dist/middlewares/feed.js"
+    "update-rss": "npm run build && node ./dist/middlewares/feedMiddleware.js"
   },
   "keywords": [],
   "author": "",

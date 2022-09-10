@@ -1,7 +1,7 @@
 import jsonServer from "json-server";
 const server = jsonServer.create();
 
-import { line_post } from "../controllers/line";
+import { line_post } from "../controllers/lineController";
 import { middleware } from "@line/bot-sdk";
 import * as dotenv from "dotenv";
 

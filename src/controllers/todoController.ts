@@ -1,22 +1,20 @@
-// import { Request, Response, NextFunction } from "express";
-import { RequestHandler } from "express";
-import { Todo } from "../models/todo";
+import { Todo } from "../models/todoModel";
 
 // NOTE:メモリ上に保持する配列
 const TODOS: Todo[] = [];
 
-export const createTodo: RequestHandler = (req, res, next) => {
+export const createTodo = (req: any, res: any) => {
   const text = (req.body as { text: string }).text;
   const newTodo = new Todo(Math.random().toString(), text);
   TODOS.push(newTodo);
   res.status(200).json({ message: "TODOを作成しました", createTodo: newTodo });
 };
 
-export const getTodos: RequestHandler = (req, res, next) => {
+export const getTodos = (req: any, res: any) => {
   res.json({ todos: TODOS });
 };
 
-export const updateTodo: RequestHandler<{ id: string }> = (req, res, next) => {
+export const updateTodo = (req: any, res: any) => {
   const todoId = req.params.id;
   const updateText = (req.body as { text: string }).text;
 
@@ -29,7 +27,7 @@ export const updateTodo: RequestHandler<{ id: string }> = (req, res, next) => {
   res.json({ message: "TODOを更新しました。", updatedTodo: TODOS[todoIndex] });
 };
 
-export const deleteTodo: RequestHandler = (req, res, next) => {
+export const deleteTodo = (req: any, res: any) => {
   const todoId = req.params.id;
   const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
 

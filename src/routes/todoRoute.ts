@@ -6,7 +6,7 @@ import {
   getTodos,
   updateTodo,
   deleteTodo,
-} from "../controllers/todos";
+} from "../controllers/todoController";
 
 server.post("/", createTodo);
 server.get("/", getTodos);

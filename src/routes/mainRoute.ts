@@ -1,6 +1,7 @@
 import jsonServer from "json-server";
 const server = jsonServer.create();
-import { MainController } from "../controllers";
+
+import { MainController } from "../controllers/mainController";
 
 server.get("/", MainController.getAll);
 

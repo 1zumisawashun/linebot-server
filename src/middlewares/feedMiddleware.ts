@@ -4,7 +4,6 @@ import { writeFileSync } from "fs";
 const parser = new Parser();
 
 /**
- * npm run build
  * npm run update-rss
  */
 (async () => {

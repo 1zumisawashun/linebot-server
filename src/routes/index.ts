@@ -1,17 +1,15 @@
-import main from "./main";
-import mock from "./mock";
-import todos from "./todos";
-import line from "./line";
+import mainRoute from "./mainRoute";
+import mockRoute from "./mockRoute";
+import todoRoute from "./todoRoute";
+import lineRoute from "./lineRoute";
 
 const routes = (server: any) => {
-  const API_ROUTE = "/api";
-
   // render
-  server.use("/", main); // おそらくrenderでejsは返せない模様
+  server.use("/", mainRoute); // おそらくrenderでejsは返せない模様
   // api
-  server.use(mock);
-  server.use("/todos", todos);
-  server.use(line);
+  server.use(mockRoute);
+  server.use("/todos", todoRoute);
+  server.use(lineRoute);
 };
 
 export default routes;
