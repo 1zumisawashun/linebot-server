@@ -1,8 +1,9 @@
-import { Router } from "express";
+import jsonServer from "json-server";
+const server = jsonServer.create();
+
 import { line_post } from "../controllers/line";
 import { middleware } from "@line/bot-sdk";
 import * as dotenv from "dotenv";
-const router = Router();
 
 dotenv.config();
 
@@ -11,6 +12,6 @@ const config = {
   channelAccessToken: process.env.LINE_ACCESS_TOKEN!,
 };
 
-router.post("/webhook", middleware(config), line_post);
+server.post("/webhook", middleware(config), line_post);
 
-export default router;
+export default server;

@@ -1,23 +1,26 @@
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 import { json } from "body-parser";
 import path from "path";
-import todoRoutes from "./routes/todos";
-import lineRoutes from "./routes/line";
 import routes from "./routes";
+import jsonServer from "json-server";
+import process from "process";
+import cookieParser from "cookie-parser";
 
-const app = express();
-app.use(lineRoutes);
+const server = jsonServer.create();
+const router = jsonServer.router("src/db.json");
+const middlewares = jsonServer.defaults({ static: `${__dirname}/public` }); // https://qiita.com/daiti0113/items/422903f9b62f6bd2a4e0
+const port = process.env.PORT || 8000;
 
-app.use(json());
+server.set("views", path.join(__dirname, "views")); // renderは出来なさそう..?
+server.set("view engine", "ejs");
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+server.use(json());
+server.use(cookieParser());
+server.use(express.json());
 
-app.use(express.static(path.join(__dirname, "public")));
-routes(app);
-app.use("/todos", todoRoutes);
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  res.status(500).json({ message: err.message });
-});
+routes(server);
 
-app.listen(4000);
+server.use(middlewares); // 静的ファイルの有効化
+server.use(router); // getの有効化
+
+server.listen(port);

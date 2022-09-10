@@ -1,15 +1,17 @@
-import { Express } from "express";
-import mainRoute from "./mainRoute";
-// import adminRoute from './adminRoute';
-// import userRoute from './userRoute';
+import main from "./main";
+import mock from "./mock";
+import todos from "./todos";
+import line from "./line";
 
-const routes = (app: Express) => {
+const routes = (server: any) => {
   const API_ROUTE = "/api";
 
-  app.use("/", mainRoute);
-  // API
-  // app.use(`${API_ROUTE}/admins`, adminRoute);
-  // app.use(`${API_ROUTE}/users`, userRoute);
+  // render
+  server.use("/", main); // おそらくrenderでejsは返せない模様
+  // api
+  server.use(mock);
+  server.use("/todos", todos);
+  server.use(line);
 };
 
 export default routes;
