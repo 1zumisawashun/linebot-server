@@ -2,7 +2,7 @@
   "name": "express-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn src/app.ts",
     "start": "nodemon dist/app.js",
@@ -10,7 +10,7 @@
     "build": "npm run clean && tsc && npm run copy-assets",
     "copy-assets": "ts-node tools/copyAssets",
     "clean": "rimraf dist",
-    "deploy": "vercel --prod",
+    "deploy": "npm run build && vercel --prod",
     "ngrok": "ngrok http 3000",
     "update-rss": "npm run build && node ./dist/middlewares/feedMiddleware.js"
   },

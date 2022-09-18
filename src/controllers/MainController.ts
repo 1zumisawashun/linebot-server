@@ -10,4 +10,12 @@ export class MainController {
       res.status(404).json({ message: "Endpoint not found" });
     }
   }
+  static async getAbout(req: Request, res: Response) {
+    try {
+      const endpoints = await EndpointModel.getAll();
+      res.render("about");
+    } catch (error) {
+      res.status(404).json({ message: "Endpoint not found" });
+    }
+  }
 }
