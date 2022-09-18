@@ -3,12 +3,19 @@ const router = Router();
 
 import { PrismaClient, Prisma } from "@prisma/client";
 const prisma = new PrismaClient({ rejectOnNotFound: true });
+/**
+ * findFirst
+ * upsert
+ * createMany
+ */
 
 const errorMessage =
   "There is a unique constraint violation, a new user cannot be created with this email";
 
 router.get("/users", async (req, res) => {
-  const users = await prisma.user.findMany();
+  const users = await prisma.user.findMany({
+    include: { Posts: true },
+  });
   return res.json(users);
 });
 

@@ -2,7 +2,7 @@ import { Express } from "express";
 
 import mainRoute from "./mainRoute";
 import mockRoute from "./mockRoute";
-import todoRoute from "./todoRoute";
+import postRoute from "./postRoute";
 import lineRoute from "./lineRoute";
 import userRoute from "./userRoute";
 
@@ -11,7 +11,7 @@ const routes = (app: Express) => {
   app.use("/", mainRoute);
   // api
   app.use(mockRoute);
-  app.use("/todos", todoRoute);
+  app.use("/posts", postRoute);
   app.use(lineRoute);
   app.use(userRoute);
 };
