@@ -11,7 +11,7 @@
     "copy-assets": "ts-node tools/copyAssets",
     "clean": "rimraf dist",
     "deploy": "npm run build && vercel --prod",
-    "ngrok": "ngrok http 3000",
+    "ngrok": "ngrok http 8000",
     "update-rss": "npm run build && node ./dist/middlewares/feedMiddleware.js"
   },
   "keywords": [],

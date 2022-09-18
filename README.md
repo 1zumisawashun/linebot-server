@@ -7,15 +7,24 @@
 
 - LINE BOT としての活用が可能
 
-  - HTTPS 化していないので別途ターミナルで ngrok を用いたトンネリングをする必要がある
+  - デプロイ済み（HTTPS 済み）なので実際に下記 QR コードから LINE でのやりとりが可能
+  - デプロイ済み（HTTPS 済み） URL を LINE 管理画面に登録する必要がある
+  - HTTPS 化していない場合は別途ターミナルで ngrok を用いたトンネリングをする必要がある
   - LINE 管理画面でトンネリングした URL を登録する必要がある
+
+![image](https://user-images.githubusercontent.com/65071534/190901106-9add8217-401a-405c-b6d4-8f7e4a8da43a.png)
 
 - TODO リストを模した CRUD 機能の検証ができる
 
+  - Prisma で SQLite に保存できるように実装している
+
 - 商品情報の API として活用できる
+
   - 使用する際はクライアント側に src/public/products と src/public/users をコピペする
 
 # 初期設定
+
+https://linebot-server.vercel.app/
 
 - ### package.json を作成する
 
@@ -43,7 +52,7 @@ npm run dev
 npm run ngrok
 ```
 
-- ### rss.jsonの内容を更新する
+- ### rss.json の内容を更新する
 
 ```
 npm run update-rss
