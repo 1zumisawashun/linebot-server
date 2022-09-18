@@ -1,5 +1,5 @@
-import jsonServer from "json-server";
-const server = jsonServer.create();
+import { Router } from "express";
+const router = Router();
 
 const authUser = {
   id: "1",
@@ -11,7 +11,7 @@ const authUser = {
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
 };
 
-server.post("/auth/signin", (req, res) => {
+router.post("/auth/signin", (req, res) => {
   if (
     !(req.body["username"] === "user" && req.body["password"] === "password")
   ) {
@@ -27,7 +27,7 @@ server.post("/auth/signin", (req, res) => {
   res.status(201).json(authUser);
 });
 
-server.post("/auth/signout", (req, res) => {
+router.post("/auth/signout", (req, res) => {
   res.cookie("token", "", {
     maxAge: 0,
     httpOnly: true,
@@ -37,7 +37,7 @@ server.post("/auth/signout", (req, res) => {
   });
 });
 
-server.post("/purchases", (req, res) => {
+router.post("/purchases", (req, res) => {
   if (req.cookies["token"] !== "dummy_token") {
     return res.status(401).json({
       message: "Unauthorized",
@@ -48,7 +48,7 @@ server.post("/purchases", (req, res) => {
   });
 });
 
-server.get("/users/me", (req, res) => {
+router.get("/users/me", (req, res) => {
   if (req.cookies["token"] !== "dummy_token") {
     return res.status(401).json({
       message: "Unauthorized",
@@ -57,4 +57,4 @@ server.get("/users/me", (req, res) => {
   res.status(200).json(authUser);
 });
 
-export default server;
+export default router;

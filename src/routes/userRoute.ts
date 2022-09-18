@@ -1,12 +1,24 @@
-import jsonServer from "json-server";
-const server = jsonServer.create();
+import { Router } from "express";
+const router = Router();
 
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-server.get("/users", async (req, res) => {
+router.get("/users", async (req, res) => {
   const users = await prisma.user.findMany();
   return res.json(users);
 });
 
-export default server;
+router.post("/users", async (req, res) => {
+  const { name, email } = req.body;
+  console.log(name, email, "name, email");
+  const user = await prisma.user.create({
+    data: {
+      name,
+      email,
+    },
+  });
+  return res.json(user);
+});
+
+export default router;

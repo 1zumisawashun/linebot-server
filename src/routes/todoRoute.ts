@@ -1,5 +1,5 @@
-import jsonServer from "json-server";
-const server = jsonServer.create();
+import { Router } from "express";
+const router = Router();
 
 import {
   createTodo,
@@ -8,9 +8,9 @@ import {
   deleteTodo,
 } from "../controllers/todoController";
 
-server.post("/", createTodo);
-server.get("/", getTodos);
-server.patch("/:id", updateTodo);
-server.delete("/:id", deleteTodo);
+router.post("/", createTodo);
+router.get("/", getTodos);
+router.patch("/:id", updateTodo);
+router.delete("/:id", deleteTodo);
 
-export default server;
+export default router;

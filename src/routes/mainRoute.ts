@@ -1,8 +1,8 @@
-import jsonServer from "json-server";
-const server = jsonServer.create();
+import { Router } from "express";
+const router = Router();
 
 import { MainController } from "../controllers/mainController";
 
-server.get("/", MainController.getAll);
+router.get("/", MainController.getAll);
 
-export default server;
+export default router;
