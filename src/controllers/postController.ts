@@ -1,10 +1,10 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 const prisma = new PrismaClient({ rejectOnNotFound: true });
+
 import { RequestHandler } from "express";
 
 export const createPost: RequestHandler = async (req, res) => {
   const { title, content, authorId } = req.body;
-  console.log(title, content, authorId, "title, content, authorId ");
   try {
     const post = await prisma.post.create({
       data: {
@@ -15,36 +15,44 @@ export const createPost: RequestHandler = async (req, res) => {
     });
     return res.json(post);
   } catch (e) {
-    console.log("エラーです。");
     return res.status(400).json(e);
   }
 };
 
-// export const getTodos: RequestHandler = (req, res) => {
-//   res.json({ todos: TODOS });
-// };
+export const getPost: RequestHandler = async (req, res) => {
+  const posts = await prisma.post.findMany();
+  return res.json(posts);
+};
 
-// export const updateTodo: RequestHandler = (req, res) => {
-//   const todoId = req.params.id;
-//   const updateText = (req.body as { text: string }).text;
+export const updatePost: RequestHandler = async (req, res) => {
+  const id = +req.params.id;
+  const { title, content } = req.body;
+  try {
+    const post = await prisma.post.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        content,
+      },
+    });
+    return res.json(post);
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+};
 
-//   const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
-//   if (todoIndex < 0) {
-//     throw new Error("対象のTODOが見つかりませんでした。");
-//   }
-//   TODOS[todoIndex] = new Todo(todoId, updateText);
-
-//   res.json({ message: "TODOを更新しました。", updatedTodo: TODOS[todoIndex] });
-// };
-
-// export const deleteTodo: RequestHandler = (req, res) => {
-//   const todoId = req.params.id;
-//   const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
-
-//   if (todoIndex < 0) {
-//     throw new Error("対象のTODOが見つかりませんでした。");
-//   }
-
-//   TODOS.splice(todoIndex, 1);
-//   res.json({ message: "TODOを削除しました。" });
-// };
+export const deletePost: RequestHandler = async (req, res) => {
+  const id = +req.params.id;
+  try {
+    const post = await prisma.post.delete({
+      where: {
+        id,
+      },
+    });
+    return res.json(post);
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+};

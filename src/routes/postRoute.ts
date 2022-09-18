@@ -3,14 +3,14 @@ const router = Router();
 
 import {
   createPost,
-  // getTodos,
-  // updateTodo,
-  // deleteTodo,
+  getPost,
+  updatePost,
+  deletePost,
 } from "../controllers/postController";
 
 router.post("/", createPost);
-// router.get("/", getTodos);
-// router.patch("/:id", updateTodo);
-// router.delete("/:id", deleteTodo);
+router.get("/", getPost);
+router.patch("/:id", updatePost);
+router.delete("/:id", deletePost);
 
 export default router;
