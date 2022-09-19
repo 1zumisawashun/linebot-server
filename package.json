@@ -13,7 +13,8 @@
     "deploy": "npm run build && vercel --prod",
     "ngrok": "ngrok http 8000",
     "update-rss": "npm run build && node ./dist/middlewares/feedMiddleware.js",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy && npm run build"
   },
   "keywords": [],
   "author": "",
