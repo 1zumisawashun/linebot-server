@@ -12,7 +12,8 @@
     "clean": "rimraf dist",
     "deploy": "npm run build && vercel --prod",
     "ngrok": "ngrok http 8000",
-    "update-rss": "npm run build && node ./dist/middlewares/feedMiddleware.js"
+    "update-rss": "npm run build && node ./dist/middlewares/feedMiddleware.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
