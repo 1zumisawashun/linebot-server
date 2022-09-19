@@ -2,7 +2,7 @@ import { Express } from "express";
 
 import mainRoute from "./mainRoute";
 import mockRoute from "./mockRoute";
-// import postRoute from "./postRoute";
+import postRoute from "./postRoute";
 import userRoute from "./userRoute";
 
 const routes = (app: Express) => {
@@ -10,7 +10,7 @@ const routes = (app: Express) => {
   app.use("/", mainRoute);
   // api
   app.use(mockRoute);
-  // app.use("/posts", postRoute);
+  app.use("/posts", postRoute);
   app.use(userRoute);
 };
 

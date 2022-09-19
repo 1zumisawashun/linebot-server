@@ -57,4 +57,8 @@ router.get("/users/me", (req, res) => {
   res.status(200).json(authUser);
 });
 
+router.get("/me", (req, res) => {
+  res.status(200).json(authUser);
+});
+
 export default router;
