@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/app.ts",
     "start": "nodemon dist/app.js",
+    "makeup": "docker-compose up -d",
     "dev:dev": "tsc-watch --onSuccess \"npm start\"",
     "prisma": "npx prisma studio",
     "build": "npm run clean && tsc && npm run copy-assets",

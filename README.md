@@ -1,5 +1,13 @@
 # 注意事項
 
+linebot-server と言いながら改造しまくった結果今は Prisma の検証環境として使用している。  
+一応 line-messaging-api の連携もしているが REST API サーバーとして使用する。
+
+- TODO リストを模した CRUD 機能の検証ができる
+
+  - Prisma で postgreSQL に保存できるように実装している
+  - なんか prisma 導入してから本番環境へデプロイうまくいかないっぽい。vercal にデプロイできるように調整中
+
 - RSS を JSON に変換し rss.json へのアウトプットが可能
 
   - API 化はできていないので随時改修する予定
@@ -13,11 +21,6 @@
   - LINE 管理画面でトンネリングした URL を登録する必要がある
 
 ![image](https://user-images.githubusercontent.com/65071534/190901106-9add8217-401a-405c-b6d4-8f7e4a8da43a.png)
-
-- TODO リストを模した CRUD 機能の検証ができる
-
-  - Prisma で SQLite に保存できるように実装している
-  - なんか本番環境で Prisma がうまくいかないっぽい
 
 - 商品情報の API として活用できる
 
@@ -38,6 +41,12 @@ tsc --init
 ```
 
 # ターミナルで実行すること
+
+- ### docker-compose する
+
+```
+npm run makeup
+```
 
 - ### サーバーを起動しホットリロードする
 
