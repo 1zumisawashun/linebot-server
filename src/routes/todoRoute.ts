@@ -6,7 +6,7 @@ import {
   createTodo,
   updateTodo,
   deleteTodo,
-} from "../controllers/todoController";
+} from "../controllers/todo.controller";
 
 router.get("/", getTodo);
 router.post("/", createTodo);

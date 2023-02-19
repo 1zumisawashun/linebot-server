@@ -13,7 +13,7 @@ const routes = (app: Express) => {
   app.use(mockRoute);
   app.use("/api/posts", postRoute);
   app.use("/api/todos", todoRoute);
-  app.use(userRoute);
+  app.use("/api/users", userRoute);
 };
 
 export default routes;

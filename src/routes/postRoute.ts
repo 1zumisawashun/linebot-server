@@ -6,7 +6,7 @@ import {
   getPost,
   updatePost,
   deletePost,
-} from "../controllers/postController";
+} from "../controllers/post.controller";
 
 router.post("/", createPost);
 router.get("/", getPost);

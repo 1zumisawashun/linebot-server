@@ -1,17 +1,37 @@
 import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
+const posts: any = [];
+
+for (let i = 0; i < 100; i++) {
+  posts.push({ title: `title ${i + 1}` });
+}
+
 async function main() {
-  const alice = await prisma.user.upsert({
-    where: { email: "alice@prisma.io" },
-    update: {},
-    create: {
-      email: "alice@prisma.io",
+  const alice = await prisma.user.create({
+    data: {
       name: "Alice",
+      email: "alice@example.com",
+      posts: {
+        create: posts,
+      },
     },
   });
 
-  console.log({ alice });
+  const bob = await prisma.user.create({
+    data: {
+      name: "Bob",
+      email: "bob@example.com",
+      posts: {
+        create: {
+          title: "Check out Prisma with Next.js",
+        },
+      },
+    },
+  });
+
+  console.log({ alice, bob });
 }
 
 main()

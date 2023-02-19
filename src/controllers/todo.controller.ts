@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { Todo } from "../models/todoModel";
+import { Todo } from "../models/todo.model";
 
 // NOTE:メモリ上に保持する配列
 const TODOS: Todo[] = [];
