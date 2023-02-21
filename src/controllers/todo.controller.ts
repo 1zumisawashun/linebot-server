@@ -1,41 +1,45 @@
 import { RequestHandler } from "express";
-import { Todo } from "../models/todo.model";
-
-// NOTE:メモリ上に保持する配列
-const TODOS: Todo[] = [];
+import { TodoService } from "../services/todo.service";
 
 export const getTodo: RequestHandler = (req, res) => {
-  res.json({ todos: TODOS });
-};
-
-export const createTodo: RequestHandler = (req, res) => {
-  const text = (req.body as { text: string }).text;
-  const newTodo = new Todo(Math.random().toString(), text);
-  TODOS.push(newTodo);
-  res.status(200).json({ message: "TODOを作成しました", createTodo: newTodo });
-};
-
-export const updateTodo: RequestHandler = (req, res) => {
-  const todoId = req.params.id;
-  const updateText = (req.body as { text: string }).text;
-
-  const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
-  if (todoIndex < 0) {
-    throw new Error("対象のTODOが見つかりませんでした。");
+  const todoService = new TodoService();
+  try {
+    const result = todoService.getTodo();
+    return res.json(result);
+  } catch (error) {
+    return res.status(400).json(error);
   }
-  TODOS[todoIndex] = new Todo(todoId, updateText);
-
-  res.json({ message: "TODOを更新しました。", updatedTodo: TODOS[todoIndex] });
+};
+export const createTodo: RequestHandler = async (req, res) => {
+  const { text } = req.body;
+  const todoService = new TodoService();
+  try {
+    const result = todoService.createTodo(text);
+    return res.json({ message: "TODOを作成しました", todos: result });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 };
 
-export const deleteTodo: RequestHandler = (req, res) => {
+export const updateTodo: RequestHandler = async (req, res) => {
   const todoId = req.params.id;
-  const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
-
-  if (todoIndex < 0) {
-    throw new Error("対象のTODOが見つかりませんでした。");
+  const { text } = req.body;
+  const todoService = new TodoService();
+  try {
+    const result = todoService.updateTodo(text, todoId);
+    return res.json(result);
+  } catch (error) {
+    return res.status(400).json(error);
   }
+};
 
-  TODOS.splice(todoIndex, 1);
-  res.json({ message: "TODOを削除しました。" });
+export const deleteTodo: RequestHandler = async (req, res) => {
+  const todoId = req.params.id;
+  const todoService = new TodoService();
+  try {
+    const result = todoService.deleteTodo(todoId);
+    return res.json({ message: "TODOを削除しました", todos: result });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 };

@@ -1,12 +1,5 @@
-import { Client, WebhookEvent, MessageAPIResponseBase } from "@line/bot-sdk";
-import * as dotenv from "dotenv";
-dotenv.config();
-
-const config = {
-  channelSecret: process.env.LINE_CHANNEL_SECRET!,
-  channelAccessToken: process.env.LINE_ACCESS_TOKEN!,
-};
-const client = new Client(config);
+import { WebhookEvent, MessageAPIResponseBase } from "@line/bot-sdk";
+import { lineClient } from "../libs/line";
 
 export class LineService {
   constructor() {}
@@ -19,7 +12,7 @@ export class LineService {
       return;
     }
     // 返信用メッセージを作成（タイプに合わせて整形しなくてはいけない）
-    return client.replyMessage(event.replyToken, {
+    return lineClient.replyMessage(event.replyToken, {
       type: "text",
       text: event.message.text,
     });

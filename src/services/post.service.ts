@@ -13,7 +13,7 @@ type UpdatePost = {
   content: string;
 };
 
-export class TodoService {
+export class PostService {
   constructor() {}
 
   async createPost(params: CreatePost): Promise<Post> {
